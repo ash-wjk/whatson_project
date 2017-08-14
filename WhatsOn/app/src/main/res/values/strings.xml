@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WhatsOn</string>
+    <string-array name="event_categorise_array">
+        <item>Indoor</item>
+        <item>Outdoor</item>
+        <item>Competitions</item>
+    </string-array>
 </resources>
