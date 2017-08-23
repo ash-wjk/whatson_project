@@ -1,36 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="uk.co.ashawijekoon.whatson.activities.MainActivity">
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context="uk.co.ashawijekoon.whatson.activities.MainActivity"
+                                             tools:layout_editor_absoluteY="81dp"
+                                             tools:layout_editor_absoluteX="0dp">
 
-    <ListView
-        android:id="@+id/events_list_view"
+
+    <view
+        android:id="@+id/catView"
+        class="android.support.constraint.ConstraintLayout"
+        id="@+id/view10"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/colorMainSpinner"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"></ListView>
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addEventActionButton"
+    </view>
+
+    <view
+        android:id="@+id/dateView"
+        class="android.support.constraint.ConstraintLayout"
+        id="@+id/view10"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorMainLoc"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catView">
+
+    </view>
+
+    <view
+        android:id="@+id/locationView"
+        class="android.support.constraint.ConstraintLayout"
+        id="@+id/view10"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorMainDate"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateView">
+
+    </view>
+
+    <Spinner
+        android:id="@+id/spinner9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:entries="@array/event_categorise_array"
+        app:layout_constraintLeft_toLeftOf="@+id/catView"
+        app:layout_constraintRight_toLeftOf="@+id/imageButton6"
+        app:layout_constraintTop_toTopOf="@+id/catView"/>
+
+    <Spinner
+        android:id="@+id/spinner10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:entries="@array/event_location_array"
+        app:layout_constraintLeft_toLeftOf="@+id/dateView"
+        app:layout_constraintRight_toLeftOf="@+id/imageButton5"
+        app:layout_constraintTop_toTopOf="@+id/dateView"/>
+
+    <view
+        android:id="@+id/view19"
+        class="android.support.constraint.ConstraintLayout"
+        id="@+id/view18"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/holo_green_dark"
+        android:text="Date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationView"
+        tools:text="Date"/>
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:inputType="date"
+        android:text="Date"
+        app:layout_constraintBottom_toTopOf="@+id/view19"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/locationView"
+        app:layout_constraintRight_toLeftOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/locationView"
+        app:layout_constraintVertical_bias="0.0"/>
+
+    <ImageButton
+        android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:clickable="true"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:tint="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/view19"
+        app:layout_constraintRight_toRightOf="@+id/locationView"
+        app:layout_constraintTop_toTopOf="@+id/locationView"
+        app:srcCompat="@android:drawable/ic_lock_idle_alarm"/>
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/locationView"
+        app:layout_constraintRight_toRightOf="@+id/dateView"
+        app:layout_constraintTop_toTopOf="@+id/dateView"
+        app:srcCompat="@android:drawable/ic_dialog_map"
+        app:layout_constraintVertical_bias="0.428"/>
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/dateView"
+        app:layout_constraintRight_toRightOf="@+id/catView"
+        app:srcCompat="@android:drawable/ic_menu_agenda"/>
 
 </android.support.constraint.ConstraintLayout>

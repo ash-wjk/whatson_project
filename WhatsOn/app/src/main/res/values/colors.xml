@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#ef5b5b</color>
+    <color name="colorPrimaryDark">#d33b3b</color>
+    <color name="colorAccent">#ff4081</color>
+    <color name="colorButton">#f17676</color>
+    <color name="colorMainDate">#9e7d9d</color>
+    <color name="colorMainLoc">#ed7697</color>
+    <color name="colorMainSpinner">#faeab5</color>
 </resources>

@@ -6,4 +6,10 @@
         <item>Outdoor</item>
         <item>Competitions</item>
     </string-array>
+    <string-array name="event_location_array">
+        <item>East London</item>
+        <item>West London</item>
+        <item>North London</item>
+        <item>SouthLondon</item>
+    </string-array>
 </resources>
