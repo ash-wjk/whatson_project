@@ -8,22 +8,22 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.ashawijekoon.whatson.R;
 import uk.co.ashawijekoon.whatson.models.Event;
 
 /**
- * Created by nuwan on 13/08/2017.
+ * Created by Asha Wijekoon on 23/08/2017.
  */
 
 public class EventAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<Event> mDataSource;
+    private List<Event> mDataSource;
 
-    public EventAdapter(Context context, ArrayList<Event> items) {
+    public EventAdapter(Context context, List<Event> items) {
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -55,11 +55,11 @@ public class EventAdapter extends BaseAdapter {
 
         Event event = (Event) getItem(i);
 
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-
-        timeTextView.setText(timeFormat.format(event.date));
-        titleTextView.setText(event.title);
-        descriptionTextView.setText(event.description);
+//        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+//
+//        timeTextView.setText(timeFormat.format(event.getDate().toString()));
+        titleTextView.setText(event.getTitle());
+        descriptionTextView.setText(event.getDescription());
 
         return rowView;
     }
