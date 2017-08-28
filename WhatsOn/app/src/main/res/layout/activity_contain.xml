@@ -15,15 +15,9 @@
         id="@+id/view10"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:background="@color/colorMainSpinner"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
 
     </view>
 
@@ -33,15 +27,9 @@
         id="@+id/view10"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:background="@color/colorMainLoc"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/catView">
+        app:layout_constraintTop_toBottomOf="@+id/catView"
+        android:layout_marginTop="0dp">
 
     </view>
 
@@ -51,15 +39,9 @@
         id="@+id/view10"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:background="@color/colorMainDate"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateView">
+        app:layout_constraintTop_toBottomOf="@+id/dateView"
+        android:layout_marginTop="0dp">
 
     </view>
 
@@ -135,24 +117,11 @@
         android:id="@+id/imageButton6"
         android:layout_width="39dp"
         android:layout_height="39dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="0dp"
         app:layout_constraintBottom_toTopOf="@+id/dateView"
         app:layout_constraintRight_toRightOf="@+id/catView"
         app:srcCompat="@android:drawable/ic_menu_agenda"
         android:layout_marginEnd="8dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addEventActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginRight="32dp"
-        android:clickable="true"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:layout_marginEnd="32dp" />
 
     <TabHost
         android:id="@+id/tabhost"

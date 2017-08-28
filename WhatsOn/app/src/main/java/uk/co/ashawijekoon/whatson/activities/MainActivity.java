@@ -42,6 +42,13 @@ public class MainActivity extends AppCompatActivity
         mAddEventButton = (FloatingActionButton) findViewById(R.id.addEventActionButton);
         mListView = (ListView) findViewById(R.id.mListView);
 
+        mAddEventButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                openAddEvent();
+            }
+        });
+
         TabHost tabHost = (TabHost)findViewById(R.id.tabhost);
         tabHost.setup();
 
@@ -78,13 +85,6 @@ public class MainActivity extends AppCompatActivity
         final List<Event> eventList = getAllEvents();
         EventAdapter adapter = new EventAdapter(this, eventList);
         mListView.setAdapter(adapter);
-
-        mAddEventButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                openAddEvent();
-            }
-        });
     }
 
     private void openAddEvent(){
