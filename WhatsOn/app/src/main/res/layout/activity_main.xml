@@ -1,170 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             tools:context="uk.co.ashawijekoon.whatson.activities.MainActivity"
-                                             tools:layout_editor_absoluteY="81dp"
-                                             tools:layout_editor_absoluteX="0dp">
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <view
-        android:id="@+id/catView"
-        class="android.support.constraint.ConstraintLayout"
-        id="@+id/view10"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/colorMainSpinner"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
-
-    </view>
-
-    <view
-        android:id="@+id/dateView"
-        class="android.support.constraint.ConstraintLayout"
-        id="@+id/view10"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorMainLoc"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/catView">
-
-    </view>
-
-    <view
-        android:id="@+id/locationView"
-        class="android.support.constraint.ConstraintLayout"
-        id="@+id/view10"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorMainDate"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateView">
-
-    </view>
-
-    <Spinner
-        android:id="@+id/spinner9"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:entries="@array/event_categorise_array"
-        app:layout_constraintLeft_toLeftOf="@+id/catView"
-        app:layout_constraintRight_toLeftOf="@+id/imageButton6"
-        app:layout_constraintTop_toTopOf="@+id/catView"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
-
-    <Spinner
-        android:id="@+id/spinner10"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:entries="@array/event_location_array"
-        app:layout_constraintLeft_toLeftOf="@+id/dateView"
-        app:layout_constraintRight_toLeftOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="@+id/dateView"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
-
-    <EditText
-        android:id="@+id/editText7"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:inputType="date"
-        android:text="Date"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/locationView"
-        app:layout_constraintRight_toLeftOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/locationView"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:tint="@android:color/black"
-        app:layout_constraintRight_toRightOf="@+id/locationView"
-        app:layout_constraintTop_toTopOf="@+id/locationView"
-        app:srcCompat="@android:drawable/ic_lock_idle_alarm"
-        android:layout_marginEnd="8dp" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
 
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/locationView"
-        app:layout_constraintRight_toRightOf="@+id/dateView"
-        app:layout_constraintTop_toTopOf="@+id/dateView"
-        app:srcCompat="@android:drawable/ic_dialog_map"
-        app:layout_constraintVertical_bias="0.428"
-        android:layout_marginEnd="8dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/dateView"
-        app:layout_constraintRight_toRightOf="@+id/catView"
-        app:srcCompat="@android:drawable/ic_menu_agenda"
-        android:layout_marginEnd="8dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addEventActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginRight="32dp"
-        android:clickable="true"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:layout_marginEnd="32dp" />
-
-    <ListView
-        android:id="@+id/mListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
-
-</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.DrawerLayout>

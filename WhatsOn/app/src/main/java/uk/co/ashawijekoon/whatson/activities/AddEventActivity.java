@@ -1,8 +1,10 @@
 package uk.co.ashawijekoon.whatson.activities;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -10,7 +12,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +41,8 @@ public class AddEventActivity extends AppCompatActivity {
     TextView event_date_label;
     TextView event_time_label;
 
+    private static String TAG = "AddEventActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +54,6 @@ public class AddEventActivity extends AppCompatActivity {
         event_time = (ImageButton) findViewById(R.id.event_time);
         event_category = (Spinner) findViewById(R.id.event_category);
         event_title =  (EditText) findViewById(R.id.event_title);
-        event_location = (EditText) findViewById(R.id.event_location);
         event_description = (EditText) findViewById(R.id.event_description);
         event_date_label = (TextView) findViewById(R.id.event_date_label);
         event_time_label = (TextView) findViewById(R.id.event_time_label);
@@ -65,6 +75,31 @@ public class AddEventActivity extends AppCompatActivity {
                 int mDay = c.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog dialog = new DatePickerDialog(AddEventActivity.this, new mDateSetListener(), mYear, mMonth, mDay);
                 dialog.show();
+            }
+        });
+
+        event_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerDialog dialog = new TimePickerDialog(AddEventActivity.this, new mTimeSetListener(),1,1,true);
+                dialog.show();
+            }
+        });
+
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
             }
         });
     }
@@ -94,6 +129,19 @@ public class AddEventActivity extends AppCompatActivity {
                     // Month is 0 based so add 1
                     .append(mDay).append("/").append(mMonth + 1).append("/")
                     .append(mYear).append(" "));
+
+        }
+    }
+
+    class mTimeSetListener implements TimePickerDialog.OnTimeSetListener {
+
+        @Override
+        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+            int mHourOfDay = hourOfDay;
+            int mMinute = minute;
+            event_time_label.setText(new StringBuffer()
+                    .append(mHourOfDay).append(":").append(mMinute));
+
         }
     }
 }
