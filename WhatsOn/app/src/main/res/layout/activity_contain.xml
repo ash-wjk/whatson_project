@@ -24,7 +24,6 @@
     <view
         android:id="@+id/dateView"
         class="android.support.constraint.ConstraintLayout"
-        id="@+id/view10"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@color/colorMainLoc"
@@ -36,7 +35,6 @@
     <view
         android:id="@+id/locationView"
         class="android.support.constraint.ConstraintLayout"
-        id="@+id/view10"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@color/colorMainDate"
