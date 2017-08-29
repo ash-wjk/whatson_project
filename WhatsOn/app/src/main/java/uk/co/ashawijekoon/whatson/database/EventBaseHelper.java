@@ -30,19 +30,7 @@ public class EventBaseHelper extends SQLiteOpenHelper {
                 EventDbSchema.EventTable.Cols.CATEGORY +
                 ")"
         );
-
-//        sqLiteDatabase.execSQL("create table " + EventDbSchema.EventTable.NAME + "(" +
-//                " _id integer primary key autoincrement, " +
-//                EventDbSchema.EventTable.Cols.UUID + ", " +
-//                EventDbSchema.EventTable.Cols.TITLE + ", " +
-//                EventDbSchema.EventTable.Cols.DESCRIPTION + ", " +
-//                EventDbSchema.EventTable.Cols.DATE + ", " +
-//                EventDbSchema.EventTable.Cols.TIME + ", " +
-//                EventDbSchema.EventTable.Cols.LOCATION_NAME + ", " +
-//                EventDbSchema.EventTable.Cols.CATEGORY + ", " +
-//                EventDbSchema.EventTable.Cols.IMAGE +
-//                ")"
-//        );
+        ;
 
     }
 

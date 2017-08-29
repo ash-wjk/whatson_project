@@ -46,8 +46,6 @@ public class EventsListFragment extends ListFragment implements AdapterView.OnIt
 
         Intent intent = new Intent(getActivity() , ViewEventActivity.class);
 
-        intent.putExtra("", sessionId);
-
         startActivity(intent);
     }
 
