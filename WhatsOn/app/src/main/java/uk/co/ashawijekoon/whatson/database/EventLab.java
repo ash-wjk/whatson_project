@@ -39,9 +39,8 @@ public class EventLab {
         values.put(EventDbSchema.EventTable.Cols.DESCRIPTION,event.getDescription());
         values.put(EventDbSchema.EventTable.Cols.DATE,event.getDate().toString());
         values.put(EventDbSchema.EventTable.Cols.TIME,event.getTime().toString());
-        values.put(EventDbSchema.EventTable.Cols.LOCATION_LAT,event.getLoaction().getLat());
-        values.put(EventDbSchema.EventTable.Cols.LOCATION_LNG,event.getLoaction().getLng());
-        values.put(EventDbSchema.EventTable.Cols.LOCATION_NAME,event.getLoaction().getName());
+        values.put(EventDbSchema.EventTable.Cols.LOCATION_NAME,event.getLoaction());
+        values.put(EventDbSchema.EventTable.Cols.CATEGORY,event.getCategory());
         values.put(EventDbSchema.EventTable.Cols.IMAGE, event.getImage());
 
         return values;

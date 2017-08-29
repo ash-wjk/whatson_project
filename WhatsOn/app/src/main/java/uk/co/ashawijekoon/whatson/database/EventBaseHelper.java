@@ -26,9 +26,8 @@ public class EventBaseHelper extends SQLiteOpenHelper {
                 EventDbSchema.EventTable.Cols.DESCRIPTION + ", " +
                 EventDbSchema.EventTable.Cols.DATE + ", " +
                 EventDbSchema.EventTable.Cols.TIME + ", " +
-                EventDbSchema.EventTable.Cols.LOCATION_LAT + ", " +
-                EventDbSchema.EventTable.Cols.LOCATION_LNG + ", " +
                 EventDbSchema.EventTable.Cols.LOCATION_NAME + ", " +
+                EventDbSchema.EventTable.Cols.CATEGORY + ", " +
                 EventDbSchema.EventTable.Cols.IMAGE +
                 ")"
         );
@@ -37,6 +36,7 @@ public class EventBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        sqLiteDatabase.execSQL("drop table " + EventDbSchema.EventTable.NAME);
+        onCreate(sqLiteDatabase);
     }
 }

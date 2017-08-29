@@ -29,9 +29,8 @@ public class EventCursorWrapper extends CursorWrapper {
         String description = getString(getColumnIndex(EventDbSchema.EventTable.Cols.DESCRIPTION));
         String date = getString(getColumnIndex(EventDbSchema.EventTable.Cols.DATE));
         String time = getString(getColumnIndex(EventDbSchema.EventTable.Cols.TIME));
-        Double location_lat = getDouble(getColumnIndex(EventDbSchema.EventTable.Cols.LOCATION_LAT));
-        Double location_lng = getDouble(getColumnIndex(EventDbSchema.EventTable.Cols.LOCATION_LNG));
         String location_name = getString(getColumnIndex(EventDbSchema.EventTable.Cols.LOCATION_NAME));
+        String category = getString(getColumnIndex(EventDbSchema.EventTable.Cols.CATEGORY));
         byte[] image = getBlob(getColumnIndex(EventDbSchema.EventTable.Cols.IMAGE));
 
         Event event = new Event(UUID.fromString(uuidString));
@@ -39,7 +38,8 @@ public class EventCursorWrapper extends CursorWrapper {
         event.setDescription(description);
         event.setDate(date);
         event.setTime(time);
-        event.setLoaction(new Location(location_lat,location_lng,location_name));
+        event.setLoaction(location_name);
+        event.setCategory(category);
         event.setImage(image);
 
         return event;

@@ -15,7 +15,9 @@ public class Event {
     private String mDescription;
     private String mDate;
     private String mTime;
-    private Location mLoaction;
+    private String mLoaction;
+
+    private String mCategory;
     private byte[] mImage;
 
     public Event() {
@@ -62,11 +64,11 @@ public class Event {
         this.mTime = mTime;
     }
 
-    public void setLoaction(Location location) {
+    public void setLoaction(String location) {
         mLoaction = location;
     }
 
-    public Location getLoaction(){
+    public String getLoaction(){
         return mLoaction;
     }
 
@@ -76,6 +78,14 @@ public class Event {
 
     public void setImage(byte[] image) {
         mImage = image;
+    }
+
+    public String getCategory() {
+        return mCategory;
+    }
+
+    public void setCategory(String mCategory) {
+        this.mCategory = mCategory;
     }
 
 }

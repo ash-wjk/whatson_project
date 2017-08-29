@@ -13,12 +13,6 @@
         <item>East London</item>
         <item>West London</item>
         <item>North London</item>
-        <item>SouthLondon</item>
-    </string-array>
-    <string-array name="drawer_items_array">
-        <item>East London</item>
-        <item>West London</item>
-        <item>North London</item>
-        <item>SouthLondon</item>
+        <item>South London</item>
     </string-array>
 </resources>

@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -44,12 +46,13 @@ import uk.co.ashawijekoon.whatson.models.Location;
 
 import static uk.co.ashawijekoon.whatson.R.id.event_image;
 
-public class AddEventActivity extends AppCompatActivity {
+public class AddEventActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Button event_add;
     ImageButton event_date;
     Button event_image_upload;
     ImageButton event_time;
     Spinner event_category;
+    Spinner event_location;
     EditText event_title;
     EditText event_description;
     TextView event_date_label;
@@ -61,7 +64,8 @@ public class AddEventActivity extends AppCompatActivity {
 
     private int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 9;
 
-    Location loaction;
+    String location;
+    String category;
 
     private static String TAG = "AddEventActivity";
 
@@ -75,6 +79,7 @@ public class AddEventActivity extends AppCompatActivity {
         event_date = (ImageButton) findViewById(R.id.event_date);
         event_time = (ImageButton) findViewById(R.id.event_time);
         event_category = (Spinner) findViewById(R.id.event_category);
+        event_location = (Spinner) findViewById(R.id.event_location);
         event_title =  (EditText) findViewById(R.id.event_title);
         event_description = (EditText) findViewById(R.id.event_description);
         event_date_label = (TextView) findViewById(R.id.event_date_label);
@@ -130,22 +135,30 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                LatLng latlng = place.getLatLng();
-                loaction = new Location(latlng.latitude,latlng.longitude,place.getName().toString());
-            }
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> catAdapter = ArrayAdapter.createFromResource(this,
+                R.array.event_categorise_array, android.R.layout.simple_spinner_item);
 
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
-            }
-        });
+        // Specify the layout to use when the list of choices appears
+        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the spinner
+        event_category.setAdapter(catAdapter);
+        event_category.setOnItemSelectedListener(this);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> locAdapter = ArrayAdapter.createFromResource(this,
+                R.array.event_location_array, android.R.layout.simple_spinner_item);
+
+        // Specify the layout to use when the list of choices appears
+        locAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the spinner
+        event_location.setAdapter(locAdapter);
+        event_location.setOnItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -185,7 +198,8 @@ public class AddEventActivity extends AppCompatActivity {
 
         e.setTitle(event_title.getText().toString());
         e.setDescription(event_description.getText().toString());
-        e.setLoaction(loaction);
+        e.setLoaction(location);
+        e.setCategory(category);
         e.setDate(event_date_label.getText().toString());
         e.setTime(event_time_label.getText().toString());
 
@@ -197,6 +211,35 @@ public class AddEventActivity extends AppCompatActivity {
         e.setImage(imageInByte);
 
         EventLab.get(AddEventActivity.this).addEvent(e);
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Spinner spinner = (Spinner) adapterView;
+        if(spinner.getId() == R.id.event_category)
+        {
+            category =  adapterView.getItemAtPosition(i).toString();
+        }
+        else if(spinner.getId() == R.id.event_location)
+        {
+            String locationName =  adapterView.getItemAtPosition(i).toString();
+            location = locationName;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+        Spinner spinner = (Spinner) adapterView;
+        if(spinner.getId() == R.id.event_category)
+        {
+            //do this
+        }
+        else if(spinner.getId() == R.id.event_location)
+        {
+            //do this
+        }
 
     }
 
