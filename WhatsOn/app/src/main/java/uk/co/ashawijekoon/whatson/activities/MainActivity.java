@@ -31,6 +31,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import uk.co.ashawijekoon.whatson.R;
+import uk.co.ashawijekoon.whatson.database.EventDbSchema;
 import uk.co.ashawijekoon.whatson.database.EventLab;
 import uk.co.ashawijekoon.whatson.fragments.EventsListFragment;
 import uk.co.ashawijekoon.whatson.models.Event;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity
 
     private String location;
     private String category;
+    String whereClause;
+    String[] whereArgs;
 
     private MapView mMapView;
     private FloatingActionButton mAddEventButton;
@@ -139,18 +142,15 @@ public class MainActivity extends AppCompatActivity
                     .append(mYear).append("/").append(pad(mMonth + 1)).append("/")
                     .append(pad(mDay)).append(" "));
 
+            setFilters();
+
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + mPager.getCurrentItem());
-        // based on the current position you can then cast the page to the correct
-        // class and call the method:
-        if (mPager.getCurrentItem() == 0 && page != null) {
-            ((EventsListFragment)page).updateList();
-        }
+        updateEventList();
     }
 
     private void openAddEvent(){
@@ -158,8 +158,66 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    private List<Event> getAllEvents(){
-        return EventLab.get(MainActivity.this).getEvents();
+    private void updateEventList(){
+        Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + mPager.getCurrentItem());
+        // based on the current position you can then cast the page to the correct
+        // class and call the method:
+        if (mPager.getCurrentItem() == 0 && page != null) {
+            ((EventsListFragment)page).updateList(whereClause,whereArgs);
+        }
+    }
+
+    private void setFilters(){
+        whereClause = new String();
+
+        String date = event_date_label.getText().toString() == ""
+                ? null : event_date_label.getText().toString() ;
+
+        if(category != null && location != null && date != null){
+            whereClause = EventDbSchema.EventTable.Cols.CATEGORY + "=? AND " +
+                    EventDbSchema.EventTable.Cols.LOCATION_NAME + "=? AND " +
+                    EventDbSchema.EventTable.Cols.DATE + "=?";
+            whereArgs = new String[3];
+            whereArgs[0] = category;
+            whereArgs[1] = location;
+            whereArgs[2] = date;
+        }else if (category != null && location != null){
+            whereClause = EventDbSchema.EventTable.Cols.CATEGORY + "=? AND " +
+                    EventDbSchema.EventTable.Cols.LOCATION_NAME ;
+            whereArgs = new String[2];
+            whereArgs[0] = category;
+            whereArgs[1] = location;
+        }else if (location != null && date != null){
+            whereClause = EventDbSchema.EventTable.Cols.LOCATION_NAME + "=? AND " +
+                    EventDbSchema.EventTable.Cols.DATE + "=?";
+            whereArgs = new String[2];
+            whereArgs[0] = location;
+            whereArgs[1] = date;
+        }else if (category != null && date != null){
+            whereClause = EventDbSchema.EventTable.Cols.CATEGORY + "=? AND " +
+                    EventDbSchema.EventTable.Cols.DATE + "=?";
+            whereArgs = new String[2];
+            whereArgs[0] = category;
+            whereArgs[1] = date;
+        }else if (category != null){
+            whereClause = EventDbSchema.EventTable.Cols.CATEGORY + "=?";
+            whereArgs = new String[1];
+            whereArgs[0] = category;
+        }else if(location != null){
+            whereClause = EventDbSchema.EventTable.Cols.LOCATION_NAME + "=?";
+            whereArgs = new String[1];
+            whereArgs[0] = location;
+        }else if(date != null){
+            whereClause = EventDbSchema.EventTable.Cols.DATE + "=?";
+            whereArgs = new String[1];
+            whereArgs[0] = date;
+        }else {
+            whereClause = null;
+            whereArgs = null;
+        }
+
+        updateEventList();
+
     }
 
 
@@ -225,18 +283,37 @@ public class MainActivity extends AppCompatActivity
         Spinner spinner = (Spinner) adapterView;
         if(spinner.getId() == R.id.event_category)
         {
-            category =  adapterView.getItemAtPosition(i).toString();
+            if(i != 0){
+                category =  adapterView.getItemAtPosition(i).toString();
+            }else {
+                category = null;
+            }
+
         }
         else if(spinner.getId() == R.id.event_location)
         {
-            String locationName =  adapterView.getItemAtPosition(i).toString();
-            location = locationName;
+            if(i != 0){
+                String locationName =  adapterView.getItemAtPosition(i).toString();
+                location = locationName;
+            }else {
+                location = null;
+            }
         }
+
+        setFilters();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        Spinner spinner = (Spinner) adapterView;
+        if(spinner.getId() == R.id.event_category)
+        {
+            category =  null;
+        }
+        else if(spinner.getId() == R.id.event_location)
+        {
+            location = null;
+        }
     }
 
     /** A simple FragmentPagerAdapter that returns List view and a SupportMapFragment. */

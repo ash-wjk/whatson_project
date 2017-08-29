@@ -41,14 +41,24 @@ public class EventsListFragment extends ListFragment implements AdapterView.OnIt
         startActivity(intent);
     }
 
+    private void fillEventList(String whereClause, String[] whereArgs){
+        Cursor cursor = EventLab.get(getContext()).queryEvents(whereClause,whereArgs);
+        mAdapter = new EventCursorAdapter(getActivity(),cursor);
+        setListAdapter(mAdapter);
+    }
+
     private void fillEventList(){
         Cursor cursor = EventLab.get(getContext()).getEventsCursor();
         mAdapter = new EventCursorAdapter(getActivity(),cursor);
         setListAdapter(mAdapter);
     }
 
-
-    public void updateList(){
-        fillEventList();
+    public void updateList(String whereClause, String[] whereArgs){
+        if((whereClause == null) || (whereArgs == null)){
+            fillEventList();
+        }else{
+            fillEventList(whereClause,whereArgs);
+        }
     }
+
 }

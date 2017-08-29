@@ -68,7 +68,7 @@ public class EventLab {
 
     }
 
-    private EventCursorWrapper queryEvents(String whereClause, String[] whereArgs) {
+    public EventCursorWrapper queryEvents(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 EventDbSchema.EventTable.NAME,
                 null, // Columns - null selects all columns
