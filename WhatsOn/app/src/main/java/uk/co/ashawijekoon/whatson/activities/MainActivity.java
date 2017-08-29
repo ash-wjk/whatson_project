@@ -69,14 +69,14 @@ public class MainActivity extends AppCompatActivity
 
         // Set categorise spinner
         ArrayAdapter<CharSequence> catAdapter = ArrayAdapter.createFromResource(this,
-                R.array.event_categorise_array, android.R.layout.simple_spinner_item);
+                R.array.event_categorise_array_with_all, android.R.layout.simple_spinner_item);
         catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         event_category.setAdapter(catAdapter);
         event_category.setOnItemSelectedListener(this);
 
         // Set location spinner
         ArrayAdapter<CharSequence> locAdapter = ArrayAdapter.createFromResource(this,
-                R.array.event_location_array, android.R.layout.simple_spinner_item);
+                R.array.event_location_array_with_all, android.R.layout.simple_spinner_item);
         locAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         event_location.setAdapter(locAdapter);
         event_location.setOnItemSelectedListener(this);

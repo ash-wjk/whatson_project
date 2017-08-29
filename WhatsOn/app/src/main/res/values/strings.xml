@@ -9,7 +9,20 @@
         <item>Outdoor</item>
         <item>Competitions</item>
     </string-array>
+    <string-array name="event_categorise_array_with_all">
+        <item>All Categorise</item>
+        <item>Indoor</item>
+        <item>Outdoor</item>
+        <item>Competitions</item>
+    </string-array>
     <string-array name="event_location_array">
+        <item>East London</item>
+        <item>West London</item>
+        <item>North London</item>
+        <item>South London</item>
+    </string-array>
+    <string-array name="event_location_array_with_all">
+        <item>All Locations</item>
         <item>East London</item>
         <item>West London</item>
         <item>North London</item>
