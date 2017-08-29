@@ -1,5 +1,7 @@
 package uk.co.ashawijekoon.whatson.models;
 
+import com.google.android.gms.location.places.Place;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,6 +14,7 @@ public class Event {
     private String mTitle;
     private String mDescription;
     private Date mDate;
+    private Location mLoaction;
 
     public Event() {
         this(UUID.randomUUID());
@@ -47,6 +50,14 @@ public class Event {
 
     public void setDate(Date date){
         mDate = date;
+    }
+
+    public void setLoaction(Location location) {
+        mLoaction = location;
+    }
+
+    public Location getLoaction(){
+        return mLoaction;
     }
 
 }

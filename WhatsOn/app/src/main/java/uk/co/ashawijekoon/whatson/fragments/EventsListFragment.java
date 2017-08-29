@@ -29,6 +29,8 @@ import static android.R.id.list;
 
 public class EventsListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
+    EventAdapter adapter;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -43,11 +45,16 @@ public class EventsListFragment extends ListFragment implements AdapterView.OnIt
 
     private void fillEventList(){
         final List<Event> eventList = getAllEvents();
-        EventAdapter adapter = new EventAdapter(getContext(), eventList);
+        adapter = new EventAdapter(getContext(), eventList);
         setListAdapter(adapter);
     }
 
     private List<Event> getAllEvents(){
         return EventLab.get(getContext()).getEvents();
+    }
+
+
+    public void updateList(){
+        fillEventList();
     }
 }
