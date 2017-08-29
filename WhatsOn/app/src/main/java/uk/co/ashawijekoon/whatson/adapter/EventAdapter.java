@@ -49,15 +49,15 @@ public class EventAdapter extends BaseAdapter {
         // Get view for row item
         View rowView = mInflater.inflate(R.layout.list_item_event, viewGroup, false);
 
-        TextView dateTextView = (TextView) rowView.findViewById(R.id.event_list_date);
         TextView timeTextView = (TextView) rowView.findViewById(R.id.event_list_time);
         TextView titleTextView = (TextView) rowView.findViewById(R.id.event_list_title);
         TextView descriptionTextView = (TextView) rowView.findViewById(R.id.event_list_description);
 
         Event event = (Event) getItem(i);
 
-        dateTextView.setText(event.getDate());
-        timeTextView.setText(event.getTime());
+//        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+//
+//        timeTextView.setText(timeFormat.format(event.getDate().toString()));
         titleTextView.setText(event.getTitle());
         descriptionTextView.setText(event.getDescription());
 
