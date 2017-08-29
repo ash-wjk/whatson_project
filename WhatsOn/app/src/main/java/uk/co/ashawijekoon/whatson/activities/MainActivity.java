@@ -31,13 +31,10 @@ import uk.co.ashawijekoon.whatson.database.EventLab;
 import uk.co.ashawijekoon.whatson.fragments.EventsListFragment;
 import uk.co.ashawijekoon.whatson.models.Event;
 
-import static android.R.attr.fragment;
-import static uk.co.ashawijekoon.whatson.R.id.mapView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    private ListView mListView;
     private MapView mMapView;
     private FloatingActionButton mAddEventButton;
 
@@ -55,7 +52,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         mAddEventButton = (FloatingActionButton) findViewById(R.id.addEventActionButton);
-        mListView = (ListView) findViewById(R.id.mListView);
 
         mAddEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
