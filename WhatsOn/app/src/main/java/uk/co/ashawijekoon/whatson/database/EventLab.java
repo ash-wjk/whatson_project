@@ -41,7 +41,7 @@ public class EventLab {
         values.put(EventDbSchema.EventTable.Cols.TIME,event.getTime().toString());
         values.put(EventDbSchema.EventTable.Cols.LOCATION_NAME,event.getLoaction());
         values.put(EventDbSchema.EventTable.Cols.CATEGORY,event.getCategory());
-        values.put(EventDbSchema.EventTable.Cols.IMAGE, event.getImage());
+//        values.put(EventDbSchema.EventTable.Cols.IMAGE, event.getImage());
 
         return values;
     }

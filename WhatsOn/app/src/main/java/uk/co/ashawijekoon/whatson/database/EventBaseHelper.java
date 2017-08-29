@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class EventBaseHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "eventBase.db";
+    private static final int VERSION = 7;
+    private static final String DATABASE_NAME = "eventDataBase.db";
 
     public EventBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -27,10 +27,22 @@ public class EventBaseHelper extends SQLiteOpenHelper {
                 EventDbSchema.EventTable.Cols.DATE + ", " +
                 EventDbSchema.EventTable.Cols.TIME + ", " +
                 EventDbSchema.EventTable.Cols.LOCATION_NAME + ", " +
-                EventDbSchema.EventTable.Cols.CATEGORY + ", " +
-                EventDbSchema.EventTable.Cols.IMAGE +
+                EventDbSchema.EventTable.Cols.CATEGORY +
                 ")"
         );
+
+//        sqLiteDatabase.execSQL("create table " + EventDbSchema.EventTable.NAME + "(" +
+//                " _id integer primary key autoincrement, " +
+//                EventDbSchema.EventTable.Cols.UUID + ", " +
+//                EventDbSchema.EventTable.Cols.TITLE + ", " +
+//                EventDbSchema.EventTable.Cols.DESCRIPTION + ", " +
+//                EventDbSchema.EventTable.Cols.DATE + ", " +
+//                EventDbSchema.EventTable.Cols.TIME + ", " +
+//                EventDbSchema.EventTable.Cols.LOCATION_NAME + ", " +
+//                EventDbSchema.EventTable.Cols.CATEGORY + ", " +
+//                EventDbSchema.EventTable.Cols.IMAGE +
+//                ")"
+//        );
 
     }
 

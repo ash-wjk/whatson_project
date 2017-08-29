@@ -198,17 +198,18 @@ public class AddEventActivity extends AppCompatActivity implements AdapterView.O
 
         e.setTitle(event_title.getText().toString());
         e.setDescription(event_description.getText().toString());
-        e.setLoaction(location);
-        e.setCategory(category);
         e.setDate(event_date_label.getText().toString());
         e.setTime(event_time_label.getText().toString());
 
+        e.setLoaction(location);
+        e.setCategory(category);
+
         // Crompress and save image
-        Bitmap bitmap = ((BitmapDrawable) event_image.getDrawable()).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageInByte = baos.toByteArray();
-        e.setImage(imageInByte);
+//        Bitmap bitmap = ((BitmapDrawable) event_image.getDrawable()).getBitmap();
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//        byte[] imageInByte = baos.toByteArray();
+//        e.setImage(imageInByte);
 
         EventLab.get(AddEventActivity.this).addEvent(e);
 
