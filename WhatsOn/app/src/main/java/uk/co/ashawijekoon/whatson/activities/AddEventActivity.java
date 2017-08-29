@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -27,7 +28,9 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -42,11 +45,6 @@ import uk.co.ashawijekoon.whatson.models.Location;
 import static uk.co.ashawijekoon.whatson.R.id.event_image;
 
 public class AddEventActivity extends AppCompatActivity {
-
-    private static final int PICK_IMAGE = 1;
-
-    private int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 9;
-
     Button event_add;
     ImageButton event_date;
     Button event_image_upload;
@@ -57,6 +55,11 @@ public class AddEventActivity extends AppCompatActivity {
     TextView event_date_label;
     TextView event_time_label;
     ImageView event_image;
+    private TimePicker timePicker;
+
+    private static final int PICK_IMAGE = 1;
+
+    private int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 9;
 
     Location loaction;
 
@@ -77,6 +80,8 @@ public class AddEventActivity extends AppCompatActivity {
         event_date_label = (TextView) findViewById(R.id.event_date_label);
         event_time_label = (TextView) findViewById(R.id.event_time_label);
         event_image = (ImageView) findViewById(R.id.event_image);
+
+        timePicker = new TimePicker(this);
 
         event_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,8 +116,17 @@ public class AddEventActivity extends AppCompatActivity {
         event_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog dialog = new TimePickerDialog(AddEventActivity.this, new mTimeSetListener(),1,1,true);
-                dialog.show();
+                Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    timePicker.setHour(hour);
+                    timePicker.setMinute(minute);
+                }
+
+                TimePickerDialog timeDialog = new TimePickerDialog(AddEventActivity.this, new mTimeSetListener(), hour, minute, false);
+                timeDialog.show();
             }
         });
 
@@ -122,9 +136,8 @@ public class AddEventActivity extends AppCompatActivity {
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.getName());
-                loaction = new Location(0,0,"DDDD");
+                LatLng latlng = place.getLatLng();
+                loaction = new Location(latlng.latitude,latlng.longitude,place.getName().toString());
             }
 
             @Override
@@ -169,12 +182,22 @@ public class AddEventActivity extends AppCompatActivity {
 
     private void addEvent(){
         Event e = new Event();
+
         e.setTitle(event_title.getText().toString());
         e.setDescription(event_description.getText().toString());
         e.setLoaction(loaction);
         e.setDate(event_date_label.getText().toString());
         e.setTime(event_time_label.getText().toString());
+
+        // Crompress and save image
+        Bitmap bitmap = ((BitmapDrawable) event_image.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageInByte = baos.toByteArray();
+        e.setImage(imageInByte);
+
         EventLab.get(AddEventActivity.this).addEvent(e);
+
     }
 
     class mDateSetListener implements DatePickerDialog.OnDateSetListener {
@@ -187,8 +210,8 @@ public class AddEventActivity extends AppCompatActivity {
             int mDay = dayOfMonth;
             event_date_label.setText(new StringBuilder()
                     // Month is 0 based so add 1
-                    .append(mDay).append("/").append(mMonth + 1).append("/")
-                    .append(mYear).append(" "));
+                    .append(mYear).append("/").append(pad(mMonth + 1)).append("/")
+                    .append(pad(mDay)).append(" "));
 
         }
     }
@@ -197,11 +220,20 @@ public class AddEventActivity extends AppCompatActivity {
 
         @Override
         public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-            int mHourOfDay = hourOfDay;
-            int mMinute = minute;
-            event_time_label.setText(new StringBuffer()
-                    .append(mHourOfDay).append(":").append(mMinute));
+            // set current time into textview
+            event_time_label.setText(new StringBuilder().append(pad(hourOfDay))
+                    .append(":").append(pad(minute)));
 
         }
     }
+
+
+    public static String pad(int c) {
+        if (c >= 10)
+            return String.valueOf(c);
+        else
+            return "0" + String.valueOf(c);
+    }
+
+
 }
