@@ -32,7 +32,7 @@
         app:layout_constraintRight_toRightOf="@+id/imageView2"/>
 
     <TextView
-        android:id="@+id/eventName"
+        android:id="@+id/event_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
@@ -43,37 +43,37 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
 
     <TextView
-        android:id="@+id/eventViewDateTime"
+        android:id="@+id/event_datetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:text="Catagory"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventCatagory"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_category"/>
 
     <TextView
-        android:id="@+id/eventCatagory"
+        android:id="@+id/event_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:text="Location"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventLocation"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_location"/>
 
     <TextView
-        android:id="@+id/eventLocation"
+        android:id="@+id/event_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:text="17 0f July 2017 at 10.30pm"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventName"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_title"/>
 
     <TextView
-        android:id="@+id/eventDes"
+        android:id="@+id/event_description"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -85,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventViewDateTime"
-        app:layout_constraintVertical_bias="1.0"/>
+        app:layout_constraintTop_toBottomOf="@+id/event_datetime"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>

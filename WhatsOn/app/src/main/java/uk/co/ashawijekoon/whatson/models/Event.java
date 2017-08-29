@@ -1,5 +1,8 @@
 package uk.co.ashawijekoon.whatson.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.android.gms.location.places.Place;
 
 import java.util.Date;
@@ -9,7 +12,7 @@ import java.util.UUID;
  * Created by Asha Wijekoon on 23/08/2017.
  */
 
-public class Event {
+public class Event implements Parcelable {
     private UUID mId;
     private String mTitle;
     private String mDescription;
@@ -88,4 +91,43 @@ public class Event {
         this.mCategory = mCategory;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeSerializable(this.mId);
+        dest.writeString(this.mTitle);
+        dest.writeString(this.mDescription);
+        dest.writeString(this.mDate);
+        dest.writeString(this.mTime);
+        dest.writeString(this.mLoaction);
+        dest.writeString(this.mCategory);
+        dest.writeByteArray(this.mImage);
+    }
+
+    protected Event(Parcel in) {
+        this.mId = (UUID) in.readSerializable();
+        this.mTitle = in.readString();
+        this.mDescription = in.readString();
+        this.mDate = in.readString();
+        this.mTime = in.readString();
+        this.mLoaction = in.readString();
+        this.mCategory = in.readString();
+        this.mImage = in.createByteArray();
+    }
+
+    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel source) {
+            return new Event(source);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 }

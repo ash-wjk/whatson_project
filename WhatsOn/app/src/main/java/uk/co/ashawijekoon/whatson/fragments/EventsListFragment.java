@@ -14,6 +14,7 @@ import uk.co.ashawijekoon.whatson.activities.ViewEventActivity;
 import uk.co.ashawijekoon.whatson.adapter.EventBaseAdapter;
 import uk.co.ashawijekoon.whatson.adapter.EventCursorAdapter;
 import uk.co.ashawijekoon.whatson.database.EventCursorWrapper;
+import uk.co.ashawijekoon.whatson.database.EventDbSchema;
 import uk.co.ashawijekoon.whatson.database.EventLab;
 import uk.co.ashawijekoon.whatson.models.Event;
 
@@ -35,9 +36,16 @@ public class EventsListFragment extends ListFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
+
+        Cursor c =(Cursor) getListView().getItemAtPosition(position);
+        EventCursorWrapper cursor= EventLab.get(getActivity()).queryEvents(EventDbSchema.EventTable.Cols.UUID + "=?",
+                new String[] {c.getString(c.getColumnIndex(EventDbSchema.EventTable.Cols.UUID))});
+
+        cursor.moveToFirst();
+        Event e = cursor.getEvent();
 
         Intent intent = new Intent(getActivity() , ViewEventActivity.class);
+        intent.putExtra("eventDataKey",e);
         startActivity(intent);
     }
 
