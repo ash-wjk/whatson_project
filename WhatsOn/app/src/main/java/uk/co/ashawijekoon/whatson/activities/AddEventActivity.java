@@ -27,6 +27,7 @@ import java.util.Date;
 import uk.co.ashawijekoon.whatson.R;
 import uk.co.ashawijekoon.whatson.database.EventLab;
 import uk.co.ashawijekoon.whatson.models.Event;
+import uk.co.ashawijekoon.whatson.models.Location;
 
 public class AddEventActivity extends AppCompatActivity {
 
@@ -40,6 +41,8 @@ public class AddEventActivity extends AppCompatActivity {
     EditText event_description;
     TextView event_date_label;
     TextView event_time_label;
+
+    Location loaction;
 
     private static String TAG = "AddEventActivity";
 
@@ -94,6 +97,7 @@ public class AddEventActivity extends AppCompatActivity {
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
                 Log.i(TAG, "Place: " + place.getName());
+                loaction = new Location(0,0,"DDDD");
             }
 
             @Override
@@ -108,6 +112,7 @@ public class AddEventActivity extends AppCompatActivity {
         Event e = new Event();
         e.setTitle(event_title.getText().toString());
         e.setDescription(event_description.getText().toString());
+        e.setLoaction(loaction);
         SimpleDateFormat form = new SimpleDateFormat("dd/mm/yyyy");
         Date d = null;
         try {

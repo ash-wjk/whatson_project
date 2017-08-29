@@ -31,6 +31,7 @@ import uk.co.ashawijekoon.whatson.database.EventLab;
 import uk.co.ashawijekoon.whatson.fragments.EventsListFragment;
 import uk.co.ashawijekoon.whatson.models.Event;
 
+import static android.R.attr.fragment;
 import static uk.co.ashawijekoon.whatson.R.id.mapView;
 
 public class MainActivity extends AppCompatActivity
@@ -80,6 +81,17 @@ public class MainActivity extends AppCompatActivity
         // to the use of a SurfaceView as the underlying view of the map.
         mPager.requestTransparentRegion(mPager);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + mPager.getCurrentItem());
+        // based on the current position you can then cast the page to the correct
+        // class and call the method:
+        if (mPager.getCurrentItem() == 0 && page != null) {
+            ((EventsListFragment)page).updateList();
+        }
     }
 
     private void openAddEvent(){
