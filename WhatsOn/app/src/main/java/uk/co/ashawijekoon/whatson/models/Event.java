@@ -13,8 +13,10 @@ public class Event {
     private UUID mId;
     private String mTitle;
     private String mDescription;
-    private Date mDate;
+    private String mDate;
+    private String mTime;
     private Location mLoaction;
+    private byte[] mImage;
 
     public Event() {
         this(UUID.randomUUID());
@@ -44,12 +46,20 @@ public class Event {
         mDescription = description;
     }
 
-    public Date getDate(){
+    public String getDate(){
         return mDate;
     }
 
-    public void setDate(Date date){
+    public void setDate(String date){
         mDate = date;
+    }
+
+    public String getTime() {
+        return mTime;
+    }
+
+    public void setTime(String mTime) {
+        this.mTime = mTime;
     }
 
     public void setLoaction(Location location) {
@@ -58,6 +68,14 @@ public class Event {
 
     public Location getLoaction(){
         return mLoaction;
+    }
+
+    public byte[] getImage() {
+        return mImage;
+    }
+
+    public void setImage(byte[] image) {
+        mImage = image;
     }
 
 }
