@@ -15,4 +15,5 @@
         <item>North London</item>
         <item>South London</item>
     </string-array>
+    <string name="title_activity_view_event">ViewEventActivity</string>
 </resources>

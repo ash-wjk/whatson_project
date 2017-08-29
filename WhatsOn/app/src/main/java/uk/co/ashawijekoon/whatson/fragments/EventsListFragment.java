@@ -1,5 +1,6 @@
 package uk.co.ashawijekoon.whatson.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import uk.co.ashawijekoon.whatson.R;
 import uk.co.ashawijekoon.whatson.activities.MainActivity;
+import uk.co.ashawijekoon.whatson.activities.ViewEventActivity;
 import uk.co.ashawijekoon.whatson.adapter.EventAdapter;
 import uk.co.ashawijekoon.whatson.database.EventLab;
 import uk.co.ashawijekoon.whatson.models.Event;
@@ -41,6 +43,12 @@ public class EventsListFragment extends ListFragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getActivity() , ViewEventActivity.class);
+
+        intent.putExtra("", sessionId);
+
+        startActivity(intent);
     }
 
     private void fillEventList(){
