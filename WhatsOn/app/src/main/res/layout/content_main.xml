@@ -49,82 +49,63 @@
     </view>
 
     <Spinner
-        android:id="@+id/spinner9"
+        android:id="@+id/event_category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:entries="@array/event_categorise_array"
         app:layout_constraintLeft_toLeftOf="@+id/catView"
-        app:layout_constraintRight_toLeftOf="@+id/imageButton6"
-        app:layout_constraintTop_toTopOf="@+id/catView"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        app:layout_constraintRight_toLeftOf="@+id/event_category_icon"
+        app:layout_constraintTop_toTopOf="@+id/catView" />
 
     <Spinner
-        android:id="@+id/spinner10"
+        android:id="@+id/event_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:entries="@array/event_location_array"
         app:layout_constraintLeft_toLeftOf="@+id/dateView"
-        app:layout_constraintRight_toLeftOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="@+id/dateView"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
-
-    <EditText
-        android:id="@+id/editText7"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:inputType="date"
-        android:text="Date"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/locationView"
-        app:layout_constraintRight_toLeftOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/locationView"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        app:layout_constraintRight_toLeftOf="@+id/event_location_icon"
+        app:layout_constraintTop_toTopOf="@+id/dateView" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/event_date"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:tint="@android:color/black"
         app:layout_constraintRight_toRightOf="@+id/locationView"
         app:layout_constraintTop_toTopOf="@+id/locationView"
-        app:srcCompat="@android:drawable/ic_lock_idle_alarm"
-        android:layout_marginEnd="8dp" />
+        app:srcCompat="@android:drawable/ic_menu_today"
+        tools:layout_editor_absoluteX="311dp" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/event_location_icon"
         android:layout_width="39dp"
         android:layout_height="39dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/locationView"
-        app:layout_constraintRight_toRightOf="@+id/dateView"
-        app:layout_constraintTop_toTopOf="@+id/dateView"
-        app:srcCompat="@android:drawable/ic_dialog_map"
-        app:layout_constraintVertical_bias="0.428"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        app:srcCompat="@android:drawable/ic_menu_mylocation"
+        tools:layout_editor_absoluteX="313dp"
+        tools:layout_editor_absoluteY="40dp" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/event_category_icon"
         android:layout_width="39dp"
         android:layout_height="39dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/dateView"
-        app:layout_constraintRight_toRightOf="@+id/catView"
         app:srcCompat="@android:drawable/ic_menu_agenda"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:layout_editor_absoluteX="313dp" />
 
     <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
@@ -137,7 +118,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7">
+        app:layout_constraintTop_toBottomOf="@+id/locationView">
 
         <android.support.v4.view.PagerTabStrip
             android:id="@+id/pager_header"
@@ -147,6 +128,20 @@
             android:paddingBottom="4dp"
             android:paddingTop="4dp" />
 
-    </android.support.v4.view.ViewPager>>
+    </android.support.v4.view.ViewPager>
+
+    <TextView
+        android:id="@+id/event_date_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Date"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/locationView"
+        app:layout_constraintRight_toLeftOf="@+id/event_date"
+        app:layout_constraintTop_toTopOf="@+id/locationView" />>
 
 </android.support.constraint.ConstraintLayout>

@@ -17,13 +17,13 @@ import uk.co.ashawijekoon.whatson.models.Event;
  * Created by Asha Wijekoon on 23/08/2017.
  */
 
-public class EventAdapter extends BaseAdapter {
+public class EventBaseAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
     private List<Event> mDataSource;
 
-    public EventAdapter(Context context, List<Event> items) {
+    public EventBaseAdapter(Context context, List<Event> items) {
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

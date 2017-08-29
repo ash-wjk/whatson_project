@@ -58,15 +58,12 @@ public class AddEventActivity extends AppCompatActivity implements AdapterView.O
     TextView event_date_label;
     TextView event_time_label;
     ImageView event_image;
+
     private TimePicker timePicker;
-
     private static final int PICK_IMAGE = 1;
-
     private int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 9;
-
-    String location;
-    String category;
-
+    private String location;
+    private String category;
     private static String TAG = "AddEventActivity";
 
     @Override
@@ -136,25 +133,17 @@ public class AddEventActivity extends AppCompatActivity implements AdapterView.O
         });
 
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        // Set categorise spinner
         ArrayAdapter<CharSequence> catAdapter = ArrayAdapter.createFromResource(this,
                 R.array.event_categorise_array, android.R.layout.simple_spinner_item);
-
-        // Specify the layout to use when the list of choices appears
         catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
         event_category.setAdapter(catAdapter);
         event_category.setOnItemSelectedListener(this);
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        // Set location spinner
         ArrayAdapter<CharSequence> locAdapter = ArrayAdapter.createFromResource(this,
                 R.array.event_location_array, android.R.layout.simple_spinner_item);
-
-        // Specify the layout to use when the list of choices appears
         locAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
         event_location.setAdapter(locAdapter);
         event_location.setOnItemSelectedListener(this);
 

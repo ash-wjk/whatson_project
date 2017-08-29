@@ -1,5 +1,6 @@
 package uk.co.ashawijekoon.whatson.activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -16,33 +17,44 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TabHost;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import java.util.Calendar;
 import java.util.List;
 
 import uk.co.ashawijekoon.whatson.R;
-import uk.co.ashawijekoon.whatson.adapter.EventAdapter;
 import uk.co.ashawijekoon.whatson.database.EventLab;
 import uk.co.ashawijekoon.whatson.fragments.EventsListFragment;
 import uk.co.ashawijekoon.whatson.models.Event;
 
+import static uk.co.ashawijekoon.whatson.activities.AddEventActivity.pad;
+
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener{
+
+    Spinner event_category;
+    Spinner event_location;
+    ImageButton event_date;
+    TextView event_date_label;
+
+    private String location;
+    private String category;
 
     private MapView mMapView;
     private FloatingActionButton mAddEventButton;
 
     private String[] mDrawerItems;
 
-    private MyFragmentPagerAdapter mAdapter;
+    private MyFragmentPagerAdapter mFragmentPagerAdapter;
     private ViewPager mPager;
 
     @Override
@@ -50,6 +62,37 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        event_category = (Spinner) findViewById(R.id.event_category);
+        event_location = (Spinner) findViewById(R.id.event_location);
+        event_date = (ImageButton) findViewById(R.id.event_date);
+        event_date_label = (TextView) findViewById(R.id.event_date_label);
+
+        // Set categorise spinner
+        ArrayAdapter<CharSequence> catAdapter = ArrayAdapter.createFromResource(this,
+                R.array.event_categorise_array, android.R.layout.simple_spinner_item);
+        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        event_category.setAdapter(catAdapter);
+        event_category.setOnItemSelectedListener(this);
+
+        // Set location spinner
+        ArrayAdapter<CharSequence> locAdapter = ArrayAdapter.createFromResource(this,
+                R.array.event_location_array, android.R.layout.simple_spinner_item);
+        locAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        event_location.setAdapter(locAdapter);
+        event_location.setOnItemSelectedListener(this);
+
+        // Show date picker
+        event_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(MainActivity.this, new mDateSetListener(), mYear, mMonth, mDay);
+                dialog.show();
+            }
+        });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -73,14 +116,30 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        mFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(mAdapter);
+        mPager.setAdapter(mFragmentPagerAdapter);
 
         // This is required to avoid a black flash when the map is loaded.  The flash is due
         // to the use of a SurfaceView as the underlying view of the map.
         mPager.requestTransparentRegion(mPager);
 
+    }
+
+    class mDateSetListener implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            int mYear = year;
+            int mMonth = monthOfYear;
+            int mDay = dayOfMonth;
+            event_date_label.setText(new StringBuilder()
+                    // Month is 0 based so add 1
+                    .append(mYear).append("/").append(pad(mMonth + 1)).append("/")
+                    .append(pad(mDay)).append(" "));
+
+        }
     }
 
     @Override
@@ -159,6 +218,25 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Spinner spinner = (Spinner) adapterView;
+        if(spinner.getId() == R.id.event_category)
+        {
+            category =  adapterView.getItemAtPosition(i).toString();
+        }
+        else if(spinner.getId() == R.id.event_location)
+        {
+            String locationName =  adapterView.getItemAtPosition(i).toString();
+            location = locationName;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     /** A simple FragmentPagerAdapter that returns List view and a SupportMapFragment. */
